@@ -1,0 +1,40 @@
+https://blog.naver.com/nogisketch/223277241841
+231207_python writelines(),readlines()간단정리
+1. writelines란?
+반복 가능한 자료형의 데이터를 파일에 쓸 때 사용함.
+2.writelines간단예시
+예를 들면, language라는 리스트가 있다고 치자. 그 안에 ['english', 'korean', 'espanol', 'chinese', 'japanese']가 있다.
+이걸 파일에 써보겠다면? 아래처럼 코딩.
+language=['english','korean','espanol','chinese','japanese']
+
+url='/User/haley/Desktop/'
+
+for item in languages:
+with open(url+'languages.txt','a') as f:
+f.write(item)
+f.write('\n')
+
+
+출력결과는 languages안의 내용이 출력됨.
+이런방법으로 리터러블한 아이템들을 나열할 수 있음.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

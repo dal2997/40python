@@ -1,0 +1,250 @@
+231207_파이썬 파일만들기,파일쓰기,파일읽기,디렉터리(폴더)만들기/open,read,write,with
+
+https://blog.naver.com/nogisketch/223277241841
+
+1)파일 객체 생성 open()
+파일을 다루기 위해(파일을 만들거나, 기존 파일의 내용을 가져오는 등) open()함수를 이용하여 파일 객체를 가져옴.
+파일객체=open("파일이름","파일 열기모드")
+(1)파일이름
+- 파일이름은 절대경로 또는 상대경로로 작성가능.
+- 절대경로 예)"C\User\Development\file_test/create_file.txt"
+- 상대경로 예)"create_file.txt" 또는 "./file_test/create_file.txt"
+상대경로는 현재 실행폴더 기준으로 경로를 설정함.
+('.'<=현재 실행폴더를 의미하기 때문에 "./file_test/create_file.txt"현재 실행포러 아래 file_test폴더 아래 create_file.txt의 파일 객체를 가져옴)
+(2)파일열기모드
+r:읽기모드로 파일을 읽기만 할 때 "r"
+w:쓰기모드로 파일에 데이터를 쓸 때 "w"
+a:추가모드로 기존 파일 마지막에 새로운 내용을 추가할 때 "a"
+f=open("create_file.txt","w")
+f.close()
+※f.close()는 열려있던 파일객체(f)를 닫는 함수로 파이썬 자동 종료시 자동으로 닫아주기도 하지만, 다시 사용할 때 오류가 발생하는 경우도 있으니 직접 닫아주는 게 좋음
+
+2)파일 만들기(파일 생성)
+- open("파일명","w")파일 열기모드를 'w'로 했을 때 해당 파일을 생성함.
+예1)#상대경로로 파일 만들기
+f=open("create_file.txt","w")
+f.close()
+예2)#상대경로로 파일 만들기
+f=open("./file_text/create_file.txt","w")
+f.close()
+예3)#절대경로로 만들기
+f=open("C:/python_test/create_file.txt","w")
+f.close()
+※경로의 디렉터리(file_test,python_test)가 없을 경우 디렉터리 없음 에러 발생함.
+디렉터리 생성방법은 6)디렉터리(폴더)만들기 참조.
+
+3)파일쓰기(write)
+- write()함수를 활용하여 파일 대에 데이터를 입력함.
+- 파일 쓰기 용도로 열때는 open()함수의 파일열기모드 옵션이 w,a 두개가 있음.
+
+tr td th제목
+<table>
+  <tr>
+    <td>파일열기모드</td>
+    <td>w</td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>설명</td>
+    <td>
+      - 파일이 없을 때 생성함
+      - 기존파일 존재할 경우 파일 내 전체 내용 삭제하고 write함.
+    </td>
+    <td>
+      - 파일이 없을 때 생성함
+      - 기존파일 존재할 경우 파일 제일 아래에 write함.
+    </td>
+  </tr>
+  <tr>
+    <td>형식</td>
+    <td>
+      파일객체=open("파일이름","w")
+      파일객체.write(문자열)
+    </td>
+    <td>
+      파일객체=open("파일이름","a")
+      파일객체.write(문자열)
+    </td>
+  </tr>
+</table>
+
+
+- print()는 호출시 화면출력 후 줄바꿈하지만, write()는 파일에 문자열을 이어서 작성하므로 그 다음줄에 작성하고자 할 때는 이스케이프코드 "\n"을 넣음.
+	예1)"w"옵션-리스트 데이터 파일쓰기
+	f=open("./file_test/write_file.txt","w")
+	listdata=["오리","병아리","닭","강아지","고양이","호랑이","토끼","말","뱀","소"]
+	max=len(listdata)
+	for i in range(max):
+		data="%d번째는 %s입니다. \n"%(i+1,listdata[i])
+		f.write(data)
+	f.close()
+
+
+	예2) "a"옵션-파일이 있는지 체크한 후 없으면 "w" 파일 생성, 있으면 "a" 그 다음줄부터 쓰기
+	import os
+	if not os.path.exists("./file_test/write_file.txt"): #파일 존재여부 체크
+		f=open("./file_test/write_file.txt","w")
+	else:
+		f=open("./file_test/write_file.txt","a")
+	listdata2=["코끼리","참새","여우","늑대"]
+	for i in range(len(listdata2)):
+		data="%d번째 %s추가되었습니다.\n"%(max+i+1,listdata2[i])
+		f.write(data)
+	f.close()
+
+
+4)파일읽기(read)
+- 파일내용을 읽어오고자 할때 파일열기 모드를 "r"로 함.
+
+파일객체=open("파일이름","r")
+문자열변수=파일객체.read()
+문자열변수=파일객체.readline()
+문자열변수=파일객체.readlines()
+
+
+<table>
+  <tr>
+    <td>읽기함수</td>
+    <td>설명</td>
+    <td>사용형식</td>
+  </tr>
+  <tr>
+    <td>read()</td>
+    <td>파일내의 전체 데이터를 문자열 변수에 대입</td>
+    <td>
+      f=open("./file_test/write_file.txt","r")
+      data=f.read()
+      print(data)
+      f.close()
+    </td>
+  </tr>
+  <tr>
+    <td>readline()</td>
+    <td>파일내의 데이터 한줄 가져와 변수에 대입/n 
+      전체 데이터가 필요없을 때 대용량 데이터에서
+      특정 문자열을 찾고 끝낼때 해당함수 사용</td>
+    <td>
+      f=open("./file_test/write_file.txt","r")
+      while True:
+        line=f.readline()
+        if not line:break
+        print(line)
+      f.close()
+    </td>
+  </tr>
+  <tr>
+    <td>readlines()</td>
+    <td>파일내의 데이터를 줄별로 리스트변수에 대입</td>
+    <td>
+      f=open("./file_test/write_file.txt","r")
+      while True:
+        line=f.readlines()
+        print(type(lines)) #리스트 형태
+        print(line)
+      f.close()
+    </td>
+  </tr>
+</table>
+
+예시1) read-string 타입으로 전체를 가져옴
+#파일읽기 read()
+f=open("./file_test/write_file.txt","r")
+data=f.read()
+print(data)
+f.close()
+
+예시2)readline()-토끼 찾기, 토끼 찾은 후엔 더이상 파일 읽기 안함.
+#파일읽기 readline()토끼가 몇번째인지 찾기
+f=open("./file_test/write_file.txt","r")
+while True:
+	line=f.readline()
+	if not line: break
+	elif line.find("토끼")>-1:
+		print(line)
+		break
+
+예시3)readlines()
+f=open("./file_test/write_file.txt","r")
+lines=f.readlines()
+print(type(lines))
+print(lines)
+f.close()
+
+5)with문과 함께 사용(with open)
+- with문과 함께 open()함수 사용하면 close()를 명시적으로 할 필요 없음.
+- with문과 사용시 open이후 줄부터 들여쓰기가 되며, 들여쓰기 종료시 자동으로 close되기에 해당 파일객체의 살아있는 구간에 대한 가독성도 높아짐.
+- 들여쓰기 하지 않으면 에러남.
+with open("파일이름","r")as 파일객체: #write도 동일하게 사용가능
+	문자열변수=파일객체.read()
+<table>
+  <tr>
+    <td>기존 open</td>
+    <td>
+      f=open("./file_test/write_file.txt","r")
+      data=f.read()
+      print(data)
+      f.close()
+    </td>
+  </tr>
+  <tr>
+    <td>with 문 사용 open</td>
+    <td>
+      with open("./file_test/write_file.txt","r")as f:
+      data=f.read()
+      print(data)
+    </td>
+  </tr>
+</table>
+
+6) 디렉터리(폴더)만들기
+- open("파일이름","w")으로 파일생성만 가능하며 디렉터리(폴더)는 생성되지 않음.
+- 디렉터리를 만들고자 할때는 os 모듈을 사용해야 함.
+- 모듈사용시 상단에 "import" 사용(import os)
+
+import os
+os.mkdir("디렉터리 명")
+
+* 디렉터리 명
+- 디렉터리명은 상대경로 또는 절대경로 가능함.
+- 이미 존재하는 디렉터리 명이면 에러남.
+예시1) #상대경로로 디렉터리 만들기
+os.mkdir("create_dir")
+f.close()
+예시2)#절대경로로 파일 만들기
+os.mkdir("C:/python_test/create_dir")
+- 만약 python_test 디렉터리가 없다면 해당 파일이 없다는 에러발생
+
+사전에 에러 발생을 예방하고자 할때 해당 디렉터리가 있는지 체크해서 없으면 만드는 제어문 추가함.
+if not os.path.isdir("create_dir"): #create_dir가 없으면
+	os.mkdir("create_dir)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

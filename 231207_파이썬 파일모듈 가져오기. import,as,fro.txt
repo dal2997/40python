@@ -1,0 +1,30 @@
+231207_파이썬 파일모듈 가져오기. import,as,from
+1) import A
+이는 A모듈을 import 하라는 의미이다. 예시코드를 보자.
+import os
+print(os.listdir())
+
+2) from B import A
+이는 A모듈로부터 B 함수를 가져오라는 의미다. 예시코드를 보자.
+from os import listdir
+print(listdir())
+#os모듈로부터 listdir함수를 가져왔다.
+첫번째와 같이 os.listdir()을 사용하면 os 모듈을 인식할 수 없기 때문에 에러가 발생한다.
+
+3) from A import *
+모듈 내의 모든 것을 가져온다.
+예시 코드를 보자.
+from os import *
+print(dir())
+출력 결과는 아래와 같다. 정말 os 모듈 내의 모든 함수를 가져왔다.
+[~]
+참고로 세번째 방식은 가급적이면 사용하지 않는 것이 좋다
+여러 모듈을 위와 같은방식으로 가져오면 동일한 이름을 가진 함수에서 충돌이 발생할 수 있기 때문이다. 
+그럼 어떤 방식이 가장 좋은 방식인가? 장단점이 있지만, 나는 첫번째 방식이 제일 좋다고 생각한다.
+함수가 어느 모듈에서 사용되었는지 명시해주기 때문이다.
+
+마지막으로 as키워드도 살펴보자.
+as키워드의 의미는 가져온 모듈에 이름을 붙여주는것이다.
+모듈의 이름이 긴 경우 축약하기 위해서 주로 사용한다.
+import backtrader as bt #backtrader 모듈을 bt라는 이름으로 사용하겠음.
+corebro=bt.Cerebro()

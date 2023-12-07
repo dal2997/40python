@@ -1,0 +1,105 @@
+https://mechacave.tistory.com/2
+
+쓰레드(Thread)란 하나의 목표를 가진 프로그램을 수행(Process)할 때, 독립적으로 운영되는 작업을 말합니다. 
+
+1. 잠시 정차하여 지도를 볼 수도 있고.(Main Thread 안에서 순차적 수행)
+2. 길을 잘 아는 친구에게 전화를 걸어 물어볼 수도 있지만.(다른 Process를 동작시켜 통신함)
+3. 내비게이션이 안내해 주는 길을 따라 가는게 편함.(멀티쓰레드를 동작시킴)
+
+이처럼 하나의 프로세스(여행) 내에서 독립적으로 동작(운전, 길찾기)하는 작업들을 쓰레도(Thread)라고 하며
+여러개의 쓰레드가 동작하는 작업을 멀티 쓰레드라고 합니다. 
+
+1. 직원 채용 공고를 내고
+import threading #쓰레드 라이브러리
+2. 할 일을 알려주고, 필요한 기본 정보들을 넘겨 줍니다.
+thread_1=threading.Thread(target=쓰레드 동작 함수, arg=(필요한 인자값) #쓰레드 함수 연결
+3. 직원이 일을 시작합니다.
+thread_1.start() #쓰레드 동작 시작
+
+#쓰레드를 만들어 주는 라이브러리를 가져온다.
+import threading
+import time
+
+#쓰레드가 할 일 정의( 작업개수, 작업속도, 작업이름)
+def doingJob(_jobs, _delay, _name):
+	print(f"{_name} 님에게 {_jobs}개의 일이 주어졌습니다. \n")
+	for i in range(_jobs):
+		print(f"{_name}님이 {i+1}번 째 일을 완료하였습니다.")
+		time.sleep(_delay)
+	print(f"{_name}님이 일을 마치고 퇴근합니다.\n")
+
+#쓰레드 생성
+thread_1=threading.Thread(target=doingJob, args=(5,0.2, ' 일반직원'))
+thread_1.start()
+
+#메인 쓰레드
+doingJob(3,0.1,'사장')
+======================================================
+데몬 쓰레드(Daemon thread)
+직원(Thread)이 늘어나고 사무시이 커지면서 사무실을 관리하는 직원(Thread)을 뽑았습니다.
+관리직원(Thread)은 회사의 주요 업무를 수행하지는 않지만, 유령(Daemon)처럼, 보이지 않는 곳에서
+직원들이 쾌적한 환경에서 업무를 할 수 있도록 청소를 하고(Garbage Collector) 서류를 저장하는(Auto Saving)등의 역할을 합니다.
+이 관리직원(Daemon thread)은 비록 중요한 업무는 아니지만 (Low priority) 조용히 자기 업무를 하다가 모든 직원들(Normal threads)이 퇴근을 하면 함께 퇴근합니다.
+관리직원(Daemon thread)은 사장(Main)이 퇴근하더라도 한 명의 직원(thread)이라도 남아 있다면, 퇴근을 하지 않습니다.
+데몬 쓰레드를 만드는 방법은 일반 쓰레드와 같습니다. 다만 만들어진 쓰레드를 데몬으로 할 것인지를 설정해주기만 하면 됩니다.
+thread_2.daemon=True
+
+업무개수: 사장(3개)|일반직원:(5개)|관리직원:(10개)
+
+#쓰레드를 만들어 주는 라이브러리를 가져온다.
+import threading
+import time
+
+#쓰레드가 할 일 정의(작업개수, 작업속도, 직원이름)
+def doingJob(_jobs, _delay, _name):
+	print(f"{_name}님에게 {_jobs}개의 일이 주어졌습니다.\n")
+	for i in range(_jobs):
+		print(f"{_name}님이 {i+1}번 째 일을 완료하였습니다.")
+		time.sleep(_delay)
+print(f"{_name}님이 일을 마치고 퇴근합니다.\n")
+
+#쓰레드 생성
+thread_1=threading.Thread(target=doingJob, args = (5,0.1,' 일반직원'))
+thread_1.start()
+#데몬 쓰레드 생성
+thread_2=threading.Thread(target=doingJob, args=(10,0.1,' 관리직원'))
+thread_2.daemon=True
+thread_2.start()
+
+#메인 쓰레드
+doingJob(3,0.1, '사장')
+
+
+=====================
+저는 줄 아두이노와 같은 심플한 하드웨어 제어프로그램을 다루다보니 쓰레드 기능을 적용해서 사용해 본 적은 없습니다.
+제가 아는 제어프로그램에서의 멀티태스킹은 타이머를 사용하여 두 개 이상의 프로세스를 왔다갔다하며 빠르게 진행하는 것입니다.
+물론 거기에 따른 메모리 공유 문제를 해결하는 데에는 세마포어 비슷하게 토큰을 만들어 돌리기도 합니다.
+사실 싱글코어 CPU라면 멀티태스킹, 멀티쓰레딩의 개념은 위와 다르지 않습니다. 무지 빠른 CPu가 여러 쓰레드를 돌아가며
+한번에 한 가지 작업을 순차적으로 처리하지만, 겉보기에는 병렬처리가 되는 것처럼 보이는 것이지요.
+요새는 멀티 CPU 들이 대부분이므로 실제로 서로 다른 CPU가 병렬로 작업을 처리하면서 메모도 공유하고 메시지도 주고 받으며
+그야말로 멀티태스킹, 멀티쓰레딩 작업을 할 수 있게 되었습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

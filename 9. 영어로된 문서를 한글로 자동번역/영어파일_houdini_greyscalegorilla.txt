@@ -1,0 +1,25 @@
+Greyscalegorilla, makers of premium assets and tools for 3D artists, is pleased to announce the availability of their photoreal 3D asset library, Greyscalegorilla Plus, for all major 3D applications, including Houdini. The launch of "Plus for Everyone" marks a significant milestone in the industry, solidifying Greyscalegorilla's position as a leading creator of premium artist-driven 3D assets. 
+This expansion allows 3D professionals worldwide to utilize a library of 4,000 high-rez textures, materials, models, HDRIs, and plugins, enabling them to create stunning renders faster than ever.
+When loading textures using the new plug-in for Houdini, artists are given the choice to create either a Material X, or VEX material. This allows you to quickly load materials for use in Karma XPU, Karma CPU or Mantra. It is also possible to create a Redshift material if you work with that 3rd party renderer inside Houdini. 
+Greyscalegorilla's mission remains focused: to empower artists to achieve their best work.
+It is all about helping artists. We take immense pride in what we've achieved, and our never ending customer-centric approach underlines our commitment to the community we serve.
+by Nick Campbell, Founder and CEO of Greyscalegorilla
+It's about delivering the most innovative high-quality materials and assets in the industry. Our curated, design-driven approach is the reason we're the most inspiring asset company out there.
+by Head of Product, Chad Ashley
+This announcement marks the first step in Greyscalegorilla's journey to universal accessibility for Greyscalegorilla Plus, showcasing their dedication to delivering the highest quality, photorealistic 3D assets while supporting 3D artists' creative endeavors.
+How to Install the Plug-in
+BEST VALUE
+$39.00
+per month
+$468 Billed Annually
+$66.00
+per month
+\
+SAVE TIME
+Unlock your creativity with Greyscalegorilla Plus: Streamline workflows and say goodbye to endless asset searches. Get instant access to all of our assets for one price. No credits. No hassle.
+COMPLETE LIBRARY
+Unleash your 3D potential with instant access to 4000+ curated materials, HDRIs, textures, and 3D models created by our in-house design team. Compatible with C4D, Blender, Houdini, Unreal Engine and all other 3D applications.
+PRICING FOR EVERY BUDGET
+Choose Monthly or save big with an Annual Membership. Scroll down to contact our Sales team and learn about flexible billing for Teams of 3 or more. Or try Plus for free with limited access to our asset library.
+EXCLUSIVE C4D BENEFITS
+Gain exclusive access to your library right within Cinema 4D, along with all our award-winning plugins like Signal, HDRI Link, and much more!
